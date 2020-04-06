@@ -1,7 +1,7 @@
 package com.novellatonyatt.service;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.novellatonyatt.constants.PageVO;
 import com.novellatonyatt.dao.UserRepository;
 import com.novellatonyatt.model.UserModel;
@@ -22,17 +22,19 @@ public class UserService {
     private UserRepository userRepository;
 
     public PageVO<UserModel> getUserList(Integer pageNo, Integer pageSize) {
-        Page<UserModel> page = PageHelper.startPage(pageNo, pageSize);
-        userRepository.getUserList();
-        return new PageVO<>((int) page.getTotal(), page.getPageSize(), page.getPages(), page.getPageNum(), page.getResult());
+        Page<UserModel> page = new Page<>();
+        page.setSize(pageSize);
+        page.setCurrent(pageNo);
+        userRepository.selectPage(page, null);
+        return new PageVO<>((int) page.getTotal(), (int) page.getSize(), (int) page.getPages(), (int) page.getCurrent(), page.getRecords());
     }
 
     public UserModel getUserByUsername(String username) {
-        return userRepository.getUserByUsername(username);
+        return userRepository.selectOne(new QueryWrapper<UserModel>().eq("username", username));
     }
 
     public void register(UserModel userModel) {
-        userRepository.register(userModel);
+        userRepository.insert(userModel);
     }
 
 }

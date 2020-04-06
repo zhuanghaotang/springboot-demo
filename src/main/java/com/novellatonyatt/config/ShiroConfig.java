@@ -1,5 +1,6 @@
 package com.novellatonyatt.config;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.novellatonyatt.dao.MenuRepository;
 import com.novellatonyatt.dao.RoleRepository;
 import com.novellatonyatt.dao.UserRepository;
@@ -127,7 +128,7 @@ public class ShiroConfig {
         @Override
         protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
             String username = authenticationToken.getPrincipal().toString();
-            UserModel userModel = userRepository.getUserByUsername(username);
+            UserModel userModel = userRepository.selectOne(new QueryWrapper<UserModel>().eq("username",username));
             if (userModel == null) {
                 throw new UnknownAccountException();
             } else {

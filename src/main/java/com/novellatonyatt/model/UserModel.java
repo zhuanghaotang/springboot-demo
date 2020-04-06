@@ -1,5 +1,9 @@
 package com.novellatonyatt.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.novellatonyatt.constants.UserType;
 import io.swagger.annotations.ApiModel;
@@ -24,9 +28,11 @@ import javax.validation.constraints.NotNull;
 @Builder
 @ApiModel("系统用户")
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@TableName(value = "user",autoResultMap = true)
 public class UserModel {
 
     @ApiModelProperty("记录唯一标识")
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty("用户名")
@@ -39,5 +45,9 @@ public class UserModel {
     private String password;
 
     @ApiModelProperty("用户类型")
+    @TableField(typeHandler = com.novellatonyatt.constants.EnumTypeHandler.class)
     private UserType userType;
+
+    @ApiModelProperty("删除标识")
+    private Boolean delFlag;
 }

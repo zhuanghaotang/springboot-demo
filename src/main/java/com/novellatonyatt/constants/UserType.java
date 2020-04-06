@@ -1,5 +1,6 @@
 package com.novellatonyatt.constants;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -9,10 +10,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @Description:
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum UserType implements BaseEnum{
+public enum UserType implements BaseEnum {
 
     C_SIDE(1, "C端用户"), B_SIDE(2, "B端用户");
 
+    @EnumValue
     private int value;
 
     private String name;
