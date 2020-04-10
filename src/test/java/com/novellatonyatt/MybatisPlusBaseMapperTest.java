@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MybatisPlusTest {
+public class MybatisPlusBaseMapperTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -62,7 +62,7 @@ public class MybatisPlusTest {
 
     @Test
     public void testInsert() {
-        UserModel userModel = UserModel.builder().username("test").password("test").userType(UserType.B_SIDE).build();
+        UserModel userModel = UserModel.builder().username("13724040555").password("test").userType(UserType.B_SIDE).build();
         System.out.println(userRepository.insert(userModel));
     }
 
@@ -85,5 +85,8 @@ public class MybatisPlusTest {
         userRepository.deleteByMap(params);
     }
 
-
+    @Test
+    public void testLambda(){
+        System.out.println(userRepository.selectList(new QueryWrapper<UserModel>().lambda().eq(UserModel::getId,10)));
+    }
 }

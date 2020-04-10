@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOG_HOME" value="/apps/logs"/>
+    <property name="LOG_HOME" value="logs"/>
     <property name="PROJECT_NAME" value="springboot-demo"/>
 
     <!-- 日志输出到控制台 -->
@@ -16,7 +16,7 @@
         <file>${LOG_HOME}/${PROJECT_NAME}.log</file>
         <!-- 指定策略为每天生成一个日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 指定文件名的策略 -->
+            <!-- 指定文件名的策略 -->git@github.com:Novellatonyatt/springboot-demo.git
             <fileNamePattern>${LOG_HOME}/${PROJECT_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志保留天数 -->
             <maxHistory>30</maxHistory>

@@ -2,6 +2,7 @@ package com.novellatonyatt.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.novellatonyatt.constants.PageVO;
 import com.novellatonyatt.dao.UserRepository;
 import com.novellatonyatt.model.UserModel;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class UserService {
+public class UserService extends ServiceImpl<UserRepository ,UserModel> {
 
     @Autowired
     private UserRepository userRepository;
