@@ -9,8 +9,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Maps;
 import com.novellatonyatt.constants.UserType;
 import com.novellatonyatt.dao.UserRepository;
+import com.novellatonyatt.model.TestUserModel;
 import com.novellatonyatt.model.UserModel;
 import com.novellatonyatt.service.UserService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -118,6 +121,14 @@ public class MybatisPlusServiceImplTest {
 
         System.out.println(userService.list(new QueryWrapper<UserModel>().lambda().eq(UserModel::getId , 10)));
 
+    }
+
+    @Test
+    public void testOther() throws InvocationTargetException, IllegalAccessException {
+        UserModel userModel = UserModel.builder().id(10).username("admin").delFlag(true).price(23).build();
+        TestUserModel testUserModel = TestUserModel.builder().build();
+        BeanUtils.copyProperties(testUserModel,userModel);
+        System.out.println(testUserModel);
     }
 
 }
