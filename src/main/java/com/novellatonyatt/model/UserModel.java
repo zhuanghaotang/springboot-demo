@@ -51,5 +51,4 @@ public class UserModel {
     @ApiModelProperty("删除标识")
     private Boolean delFlag;
 
-    private int price;
 }
