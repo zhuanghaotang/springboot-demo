@@ -19,6 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 /**
  * @author: Zhuang HaoTang
@@ -163,4 +166,62 @@ public class MybatisPlusServiceImplTest {
         System.out.println("并行流耗时：" + (System.currentTimeMillis() - beginTime2));
     }
 
+    @Test
+    public void testAsync() throws ExecutionException, InterruptedException {
+        List<String> productList = Lists.newArrayList("苹果","华为","三星","小米");
+        System.out.println("需要调用四个商品的价格方法，包括苹果、华为、三星、小米");
+//        long startTime = System.currentTimeMillis();
+//        productList.stream().map(str -> getPrice(str)).collect(Collectors.toList());
+//        System.out.println(String.format("使用同步的方式执行，耗时:%s",System.currentTimeMillis() - startTime));
+//
+//        long startTimeParallel = System.currentTimeMillis();
+//        productList.parallelStream().map(str -> getPrice(str)).collect(Collectors.toList());
+//        System.out.println(String.format("使用并行流的方式执行，耗时:%s",System.currentTimeMillis() - startTimeParallel));
+
+//        long startTimeAsync = System.currentTimeMillis();
+//        List<CompletableFuture> futureList = productList.stream().map( (str) -> CompletableFuture.supplyAsync( ()-> getPrice(str))).collect(Collectors.toList());
+//        futureList.forEach(future -> {
+//            try {
+//                future.get();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        System.out.println(String.format("使用异步方式执行，耗时:%s",System.currentTimeMillis() - startTimeAsync));
+
+        // 是否有对Supplier函数式接口的方法进行异常的捕获
+        long startTime = System.currentTimeMillis();
+        CompletableFuture<Double> future = CompletableFuture.supplyAsync(()-> {
+//            int i = 1/0;
+        return getPrice(productList.get(0));
+        });
+        // join和get方法都会阻塞，等待结果，但是join没有声明异常
+        // 如果Supplier接口里面的方法抛出异常，那么当调用get()或则join方法的时候会抛出这个异常。
+//        System.out.println(future.join());
+//        System.out.println(future.get());
+
+        CompletableFuture<Double> composeFuture = future.thenComposeAsync( value ->  CompletableFuture.supplyAsync( () -> value+this.getPrice(productList.get(1))) );
+        System.out.println(composeFuture.get());
+        System.out.println("总耗时："+(System.currentTimeMillis() - startTime));
+
+//        CompletableFuture<Double> future1 =future.thenCombine(CompletableFuture.supplyAsync(()-> this.getPrice(productList.get(1))) , (f1 , f2) -> f1 + f2);
+//        System.out.println(future1.get());
+//        System.out.println("总耗时："+(System.currentTimeMillis() - startTime));
+        // thenCompose和thenCombine都是组合Future，async即组合操作交由第三个线程来处理
+
+
+
+    }
+
+    private Double getPrice(String product){
+        System.out.println("1");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return 1d;
+    }
 }
