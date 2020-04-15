@@ -173,8 +173,7 @@ public class MybatisPlusServiceImplTest {
 //        long startTime = System.currentTimeMillis();
 //        productList.stream().map(str -> getPrice(str)).collect(Collectors.toList());
 //        System.out.println(String.format("使用同步的方式执行，耗时:%s",System.currentTimeMillis() - startTime));
-//
-//        long startTimeParallel = System.currentTimeMillis();
+////        long startTimeParallel = System.currentTimeMillis();
 //        productList.parallelStream().map(str -> getPrice(str)).collect(Collectors.toList());
 //        System.out.println(String.format("使用并行流的方式执行，耗时:%s",System.currentTimeMillis() - startTimeParallel));
 
@@ -201,14 +200,14 @@ public class MybatisPlusServiceImplTest {
         // 如果Supplier接口里面的方法抛出异常，那么当调用get()或则join方法的时候会抛出这个异常。
 //        System.out.println(future.join());
 //        System.out.println(future.get());
-
-        CompletableFuture<Double> composeFuture = future.thenComposeAsync( value ->  CompletableFuture.supplyAsync( () -> value+this.getPrice(productList.get(1))) );
-        System.out.println(composeFuture.get());
-        System.out.println("总耗时："+(System.currentTimeMillis() - startTime));
-
-//        CompletableFuture<Double> future1 =future.thenCombine(CompletableFuture.supplyAsync(()-> this.getPrice(productList.get(1))) , (f1 , f2) -> f1 + f2);
-//        System.out.println(future1.get());
+//        CompletableFuture<Double> composeFuture = future.thenComposeAsync( value ->  CompletableFuture.supplyAsync( () -> value+this.getPrice(productList.get(1))) );
+//        System.out.println("lai");
+//        System.out.println(composeFuture.get());
 //        System.out.println("总耗时："+(System.currentTimeMillis() - startTime));
+
+        CompletableFuture<Double> future1 =future.thenCombine(CompletableFuture.supplyAsync(()-> this.getPrice(productList.get(1))) , (f1 , f2) -> f1 + f2);
+        System.out.println(future1.get());
+        System.out.println("总耗时："+(System.currentTimeMillis() - startTime));
         // thenCompose和thenCombine都是组合Future，async即组合操作交由第三个线程来处理
 
 
