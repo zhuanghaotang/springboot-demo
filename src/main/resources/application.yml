@@ -40,3 +40,8 @@ mybatis:
 pagehelper:
   helper-dialect: MySQL
 
+#myConfig
+inf:
+  username: admin
+  password: 8f9f4f77ba
+  age: 24
