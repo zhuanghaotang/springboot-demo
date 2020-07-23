@@ -86,7 +86,7 @@ public class MybatisPlusBaseMapperTest {
     }
 
     @Test
-    public void testLambda(){
-        System.out.println(userRepository.selectList(new QueryWrapper<UserModel>().lambda().eq(UserModel::getId,10)));
+    public void testLambda() {
+        System.out.println(userRepository.selectList(new QueryWrapper<UserModel>().lambda().eq(UserModel::getId, 10)));
     }
 }

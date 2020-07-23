@@ -158,11 +158,11 @@ public class MybatisPlusServiceImplTest {
 //        System.out.println("reduce："+list.stream().reduce( "ZHT:",(str1 , str2) -> str1+str2,(str1 , str2) -> str1+str2 ));
 
         long beginTime1 = System.currentTimeMillis();
-        System.out.println("reduce：" + testList.stream().reduce("begin:" ,(str1, str2) -> str1 + str2));
+        System.out.println("reduce：" + testList.stream().reduce("begin:", (str1, str2) -> str1 + str2));
         System.out.println("串行流耗时：" + (System.currentTimeMillis() - beginTime1));
 
         long beginTime2 = System.currentTimeMillis();
-        System.out.println("reduce：" + testList.stream().parallel().reduce("begin:" ,(str1, str2) -> str1 + str2));
+        System.out.println("reduce：" + testList.stream().parallel().reduce("begin:", (str1, str2) -> str1 + str2));
         System.out.println("并行流耗时：" + (System.currentTimeMillis() - beginTime2));
     }
 

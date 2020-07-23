@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @ApiModel("系统用户")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@TableName(value = "user",autoResultMap = true)
+@TableName(value = "user", autoResultMap = true)
 public class UserModel {
 
     @ApiModelProperty("记录唯一标识")
@@ -37,7 +37,7 @@ public class UserModel {
 
     @ApiModelProperty("用户名")
     @NotBlank(message = "用户名不能为空或者空字符串")
-    @Length(max = 20,message = "用户名长度不能大于20")
+    @Length(max = 20, message = "用户名长度不能大于20")
     private String username;
 
     @ApiModelProperty("密码")

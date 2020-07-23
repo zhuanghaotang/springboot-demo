@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.novellatonyatt.dao")
 public class WebApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebApplication.class, args);
+    }
 
 }

@@ -128,7 +128,7 @@ public class ShiroConfig {
         @Override
         protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
             String username = authenticationToken.getPrincipal().toString();
-            UserModel userModel = userRepository.selectOne(new QueryWrapper<UserModel>().eq("username",username));
+            UserModel userModel = userRepository.selectOne(new QueryWrapper<UserModel>().eq("username", username));
             if (userModel == null) {
                 throw new UnknownAccountException();
             } else {
@@ -138,7 +138,7 @@ public class ShiroConfig {
 
         @Override
         protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-            String username = (String)principalCollection.getPrimaryPrincipal();
+            String username = (String) principalCollection.getPrimaryPrincipal();
             SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
             // 角色
             List<RoleModel> roleList = roleRepository.getRoleListByUsername(username);

@@ -6,9 +6,9 @@
 
     <!-- 日志输出到控制台 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-       <encoder>
-           <pattern>%date{yyyy-MM-dd HH:mm:ss} %-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
-       </encoder>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} %-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
     </appender>
 
     <!-- 每天生成一个日志文件 -->

@@ -25,7 +25,7 @@ public class Result<T> {
      */
     private T data;
 
-    public Result(ResultCode resultCode,  T data) {
+    public Result(ResultCode resultCode, T data) {
         this.code = resultCode.getCode();
         this.message = resultCode.getName();
         this.data = data;

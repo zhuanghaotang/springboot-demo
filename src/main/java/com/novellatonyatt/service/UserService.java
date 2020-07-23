@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class UserService extends ServiceImpl<UserRepository ,UserModel> {
+public class UserService extends ServiceImpl<UserRepository, UserModel> {
 
     @Autowired
     private UserRepository userRepository;
